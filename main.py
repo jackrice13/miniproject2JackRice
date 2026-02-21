@@ -1,6 +1,7 @@
 ### INF601 - Advanced Programming in Python
 ### Jack Rice
 ### Mini Project 2
+
 # This project will be using Pandas dataframes. This isn't intended to be full blown data science project. The goal here is to come up with some question and then see what API or datasets you can use to get the information needed to answer that question. This will get you familar with working with datasets and asking questions, researching APIs and gathering datasets. If you get stuck here, please email me!
 #
 #     (5/5 points) Initial comments with your name, class and project at the top of your .py file.
@@ -16,3 +17,37 @@
 #     (10/10 points) There should be a minimum of 5 commits on your project, be sure to commit often!
 #     (10/10 points) I will be checking out the main branch of your project. Please be sure to include a requirements.txt file which contains all the packages that need installed. You can create this fille with the output of pip freeze at the terminal prompt.
 #     (20/20 points) There should be a README.md file in your project that explains what your project is, how to install the pip requirements, and how to execute the program. Please use the GitHub flavor of Markdown. Be thorough on the explanations.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('data/tech_employment_2000_2025.csv', index_col=0, low_memory=False)
+df = df.reset_index()
+print(df.head())
+
+company = df[['company','year','layoffs','new_hires']]
+#print(company.value_counts())
+
+#AMD Data
+amd_data = df[df['company'] == 'AMD'].groupby('year').sum()
+# amd_layoffs = df.loc[df['company'] == 'AMD', 'layoffs']
+# print(amd_layoffs.head())
+# amd_hires = df.loc[df['company'] == 'AMD', 'new_hires']
+# print(amd_hires.head())
+
+#Adobe Data
+adobe_layoffs = df.loc[df['company'] == 'Adobe', 'layoffs']
+print(adobe_layoffs.head())
+adobe_hires = df.loc[df['company'] == 'Adobe', 'new_hires']
+print(adobe_hires.head())
+
+# amd_layoffs.plot(kind='bar', title='AMD', rot=0)
+
+plt.plot(amd_data.index, amd_data['layoffs'], label='Layoffs', color='crimson', marker='o', linewidth=2)
+plt.plot(amd_data.index, amd_data['new_hires'], label='New Hires', color='seagreen', marker='s', linewidth=2)
+plt.title('AMD Layoffs and New Hires by Year')
+plt.xlabel('Year')
+plt.ylabel('Employment')
+plt.legend()
+plt.show()
+#push2222w
