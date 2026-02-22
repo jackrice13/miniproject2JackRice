@@ -78,18 +78,44 @@ plt.show()
 print('saving image to charts/AMD.png')
 
 
+# #Diverging Bar Chart
+# amd_diverging = amd_data[['layoffs', 'new_hires']].copy()
+# amd_diverging['layoffs'] = -amd_diverging['layoffs']
+#
+# amd_diverging.plot(
+#     kind='bar',
+#     color=['crimson', 'seagreen'],
+#     label=['Layoffs', 'New Hires'],
+#     rot=45
+# )
+#
+# plt.axhline(0, color='black', linewidth=0.8)  # bold zero line
+# plt.title('AMD Layoffs and New Hires by Year')
+# plt.xlabel('Year')
+# plt.ylabel('Employment')
+# plt.legend()
+# plt.tight_layout()
+# plt.savefig('charts/AMDdiverging.png')
+# plt.show()
+# print('saving image to charts/AMDdiverging.png')
 
-amd_diverging = amd_data[['layoffs', 'new_hires']].copy()
-amd_diverging['layoffs'] = -amd_diverging['layoffs']
+#Stacked Bar Chart
+years = amd_data.index
+#sets position so bars are stacked instead of side by side.
+x = range(len(years))
 
-amd_diverging.plot(
-    kind='bar',
-    color=['crimson', 'seagreen'],
-    label=['Layoffs', 'New Hires'],
-    rot=45
-)
+plt.bar(x, amd_data['new_hires'], color='seagreen', label='New Hires')
+plt.bar(x, -amd_data['layoffs'], color='crimson', label='Layoffs')
 
-plt.axhline(0, color='black', linewidth=0.8)  # bold zero line
+# Trend lines
+hires_trend = amd_data['new_hires'].rolling(2, min_periods=1).mean()
+layoffs_trend = amd_data['layoffs'].rolling(2, min_periods=1).mean()
+
+plt.plot(x, hires_trend, color='darkgreen', linewidth=2, label='New Hires Trend')
+plt.plot(x, -layoffs_trend, color='darkred', linewidth=2, label='Layoffs Trend')
+
+plt.axhline(0, color='black', linewidth=2)
+plt.xticks(x, years, rotation=45)
 plt.title('AMD Layoffs and New Hires by Year')
 plt.xlabel('Year')
 plt.ylabel('Employment')
