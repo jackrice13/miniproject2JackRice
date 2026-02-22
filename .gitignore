@@ -1,6 +1,9 @@
 #data file
 tech_employment_2000_2025.csv
 
+#Charts Folder
+/charts/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
