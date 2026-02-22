@@ -49,15 +49,52 @@ print(adobe_hires.head())
 
 # amd_layoffs.plot(kind='bar', title='AMD', rot=0)
 
-plt.plot(amd_data.index, amd_data['layoffs'], label='Layoffs', color='crimson', marker='o', linewidth=2)
-plt.plot(amd_data.index, amd_data['new_hires'], label='New Hires', color='seagreen', marker='s', linewidth=2)
+# plt.plot(amd_data.index, amd_data['layoffs'], label='Layoffs', color='crimson', marker='o', linewidth=2)
+# plt.plot(amd_data.index, amd_data['new_hires'], label='New Hires', color='seagreen', marker='s', linewidth=2)
+# plt.title('AMD Layoffs and New Hires by Year')
+# plt.xlabel('Year')
+# plt.ylabel('Employment')
+# plt.legend()
+# plt.savefig(f'charts/AMD.png')
+# plt.show()
+# print(f'saving image to charts/AMD.png')
+
+
+
+amd_data[['layoffs', 'new_hires']].plot(
+    kind='bar',
+    color=['crimson', 'seagreen'],
+    label=['Layoffs', 'New Hires'],
+    rot=45
+)
+
 plt.title('AMD Layoffs and New Hires by Year')
 plt.xlabel('Year')
 plt.ylabel('Employment')
 plt.legend()
-plt.savefig(f'charts/AMD.png')
+plt.tight_layout()
+plt.savefig('charts/AMD.png')
 plt.show()
-print(f'saving image to charts/AMD.png')
+print('saving image to charts/AMD.png')
 
+
+
+amd_diverging = amd_data[['layoffs', 'new_hires']].copy()
+amd_diverging['layoffs'] = -amd_diverging['layoffs']
+
+amd_diverging.plot(
+    kind='bar',
+    color=['crimson', 'seagreen'],
+    label=['Layoffs', 'New Hires'],
+    rot=45
+)
+
+plt.axhline(0, color='black', linewidth=0.8)  # bold zero line
+plt.title('AMD Layoffs and New Hires by Year')
+plt.xlabel('Year')
+plt.ylabel('Employment')
+plt.legend()
+plt.tight_layout()
+plt.savefig('charts/AMDdiverging.png')
 plt.show()
-#push2222w
+print('saving image to charts/AMDdiverging.png')
