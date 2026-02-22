@@ -13,9 +13,9 @@
 #     Here are some other great datasets: https://www.kaggle.com/datasets
 #     x(10/10 points) Store this information in Pandas dataframe. These should be 2D data as a dataframe, meaning the data is labeled tabular data.
 #     x(10/10 points) Using matplotlib, graph this data in a way that will visually represent the data. Really try to build some fancy charts here as it will greatly help you in future homework assignments and in the final project.
-#     (10/10 points) Save these graphs in a folder called charts as PNG files. Do not upload these to your project folder, the project should save these when it executes. You may want to add this folder to your .gitignore file.
-#     (10/10 points) There should be a minimum of 5 commits on your project, be sure to commit often!
-#     (10/10 points) I will be checking out the main branch of your project. Please be sure to include a requirements.txt file which contains all the packages that need installed. You can create this fille with the output of pip freeze at the terminal prompt.
+#     x(10/10 points) Save these graphs in a folder called charts as PNG files. Do not upload these to your project folder, the project should save these when it executes. You may want to add this folder to your .gitignore file.
+#     x(10/10 points) There should be a minimum of 5 commits on your project, be sure to commit often!
+#     x(10/10 points) I will be checking out the main branch of your project. Please be sure to include a requirements.txt file which contains all the packages that need installed. You can create this fille with the output of pip freeze at the terminal prompt.
 #     (20/20 points) There should be a README.md file in your project that explains what your project is, how to install the pip requirements, and how to execute the program. Please use the GitHub flavor of Markdown. Be thorough on the explanations.
 
 import pandas as pd
@@ -75,30 +75,9 @@ plt.grid(color='grey', linestyle=':', linewidth=1.0, axis='y', alpha=0.5)
 plt.legend()
 plt.tight_layout()
 plt.savefig('charts/AMD.png')
-plt.show()
-print('saving image to charts/AMD.png')
+#plt.show()
+print('Saving image to charts/AMD.png')
 
-
-# #Diverging Bar Chart
-# amd_diverging = amd_data[['layoffs', 'new_hires']].copy()
-# amd_diverging['layoffs'] = -amd_diverging['layoffs']
-#
-# amd_diverging.plot(
-#     kind='bar',
-#     color=['crimson', 'seagreen'],
-#     label=['Layoffs', 'New Hires'],
-#     rot=45
-# )
-#
-# plt.axhline(0, color='black', linewidth=0.8)  # bold zero line
-# plt.title('AMD Layoffs and New Hires by Year')
-# plt.xlabel('Year')
-# plt.ylabel('Employment')
-# plt.legend()
-# plt.tight_layout()
-# plt.savefig('charts/AMDdiverging.png')
-# plt.show()
-# print('saving image to charts/AMDdiverging.png')
 
 #Stacked Bar Chart
 years = amd_data.index
@@ -123,10 +102,9 @@ plt.ylabel('Employment')
 plt.grid(color='grey', linestyle=':', linewidth=1.0, axis='y', alpha=0.5)
 plt.legend()
 plt.tight_layout()
-plt.savefig('charts/AMDdiverging.png')
-plt.show()
-print('saving image to charts/AMDdiverging.png')
-
+plt.savefig('charts/AMD_diverging.png')
+#plt.show()
+print('Saving image to charts/AMD_diverging.png')
 
 
 # AMD vs Adobe Layoffs Comparison
@@ -139,8 +117,6 @@ adobe_layoffs_aligned = adobe_data['layoffs'].reindex(all_years, fill_value=0)
 plt.bar([i - 0.2 for i in x], amd_layoffs_aligned, width=0.4, color='crimson', label='AMD Layoffs')
 plt.bar([i + 0.2 for i in x], adobe_layoffs_aligned, width=0.4, color='steelblue', label='Adobe Layoffs')
 
-
-
 plt.xticks(x, all_years, rotation=45)
 plt.title('AMD vs Adobe Layoffs by Year')
 plt.xlabel('Year')
@@ -149,5 +125,6 @@ plt.grid(color='grey', linestyle=':', linewidth=1.0, axis='y', alpha=0.5)
 plt.legend()
 plt.tight_layout()
 plt.savefig('charts/AMD_vs_Adobe_layoffs.png')
-plt.show()
-print('saving image to charts/AMD_vs_Adobe_layoffs.png')
+#plt.show()
+print('Saving image to charts/AMD_vs_Adobe_layoffs.png')
+print ('All Work Complete')
