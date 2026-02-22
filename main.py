@@ -29,7 +29,7 @@ if not chart.exists():
 
 df = pd.read_csv('data/tech_employment_2000_2025.csv', index_col=0, low_memory=False)
 df = df.reset_index()
-print(df.head())
+#print(df.head())
 
 company = df[['company','year','layoffs','new_hires']]
 #print(company.value_counts())
@@ -43,11 +43,11 @@ amd_data = df[df['company'] == 'AMD'].groupby('year').sum()
 
 #Adobe Data
 adobe_layoffs = df.loc[df['company'] == 'Adobe', 'layoffs']
-print(adobe_layoffs.head())
+#print(adobe_layoffs.head())
 adobe_hires = df.loc[df['company'] == 'Adobe', 'new_hires']
-print(adobe_hires.head())
+#print(adobe_hires.head())
 
-# amd_layoffs.plot(kind='bar', title='AMD', rot=0)
+adobe_data = df[df['company'] == 'Adobe'].groupby('year').sum()
 
 # plt.plot(amd_data.index, amd_data['layoffs'], label='Layoffs', color='crimson', marker='o', linewidth=2)
 # plt.plot(amd_data.index, amd_data['new_hires'], label='New Hires', color='seagreen', marker='s', linewidth=2)
@@ -125,3 +125,24 @@ plt.savefig('charts/AMDdiverging.png')
 plt.show()
 print('saving image to charts/AMDdiverging.png')
 
+
+
+# AMD vs Adobe Layoffs Comparison
+all_years = sorted(set(amd_data.index) | set(adobe_data.index))
+x = range(len(all_years))
+
+amd_layoffs_aligned = amd_data['layoffs'].reindex(all_years, fill_value=0)
+adobe_layoffs_aligned = adobe_data['layoffs'].reindex(all_years, fill_value=0)
+
+plt.bar([i - 0.2 for i in x], amd_layoffs_aligned, width=0.4, color='crimson', label='AMD Layoffs')
+plt.bar([i + 0.2 for i in x], adobe_layoffs_aligned, width=0.4, color='steelblue', label='Adobe Layoffs')
+
+plt.xticks(x, all_years, rotation=45)
+plt.title('AMD vs Adobe Layoffs by Year')
+plt.xlabel('Year')
+plt.ylabel('Layoffs')
+plt.legend()
+plt.tight_layout()
+plt.savefig('charts/AMD_vs_Adobe_layoffs.png')
+plt.show()
+print('saving image to charts/AMD_vs_Adobe_layoffs.png')
