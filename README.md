@@ -9,8 +9,7 @@ Mini Project 2 Pandas
 
 ## Description
  
-This program queries Yahoo Finance for the last 10 closing prices for 5 stock tickers (AAPL, GOOG, META, MSFT, V) and produces graphical charts with the data. These charts are automatically saved to the /charts/ folder.
-
+This program uses data from a CSV file to chart AMD new hires and layoffs over the years. It also creates a chart comparing AMD and Adobe layoffs year by year.
 ## Getting Started
  ##
 ### Dependencies
@@ -45,6 +44,6 @@ Jack Rice
  
 Inspiration, code snippets, etc.
 * [matplotlib](https://matplotlib.org/stable/tutorials/index.html)
-* [yfinance](https://pypi.org/project/yfinance/)
+
 
 
