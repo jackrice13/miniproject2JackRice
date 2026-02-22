@@ -124,3 +124,4 @@ plt.tight_layout()
 plt.savefig('charts/AMDdiverging.png')
 plt.show()
 print('saving image to charts/AMDdiverging.png')
+
